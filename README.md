@@ -1,4 +1,5 @@
 In this project we are performing CRUP opertaions which is Create, Read, Update and Delete by using Django and Sqlite DB. 
+
 Home URL/: http://localhost:8000/emp/home/
 
 ![image](https://github.com/vishnuSah/django-profile-api/assets/127580123/2f04c21a-6610-411d-a899-f6ab54c688b2)
