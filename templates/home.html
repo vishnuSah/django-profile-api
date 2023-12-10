@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <div class="container">
+        {% include 'navbar.html' %}
+        <h2>Welcome to home Page</h2>
+
+        <form action="/index/" method="POST">
+            {% csrf_token %}
+            <input type="checkbox" value="True" name="check">
+            <button>Show</button>
+        </form>
+        {% if isActive %}
+        {% for lang in languages %}
+        <li>{{lang}}</li>
+        {% endfor %}
+        <hr>
+        
+        <li>{{student_data.name}}</li>
+        <li>{{student_data.college}}</li>
+        <li>{{student_data.Hobby}}</li>
+        {% endif %}
+        <br>
+    
+    </div>
+</body>
+</html>
