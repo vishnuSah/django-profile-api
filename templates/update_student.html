@@ -15,13 +15,12 @@
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="card bg-dark text-white">
-            {{stud.name}}
             
             <form method="POST" action="">
               {% csrf_token %}
               <div class="mb-3">
                 <label for="name" class="form-label">Student Name</label>
-                <input type="text" name="name" class="form-control" id="name" value={{stud.name}}>
+                <input type="text" name="name" class="form-control" id="name" value="{{stud.name}}">
               </div>
               <div class="mb-3">
                 <label for="stud_id" class="form-label">Student Id</label>

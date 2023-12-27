@@ -32,6 +32,8 @@ def add_student(request):
             data.save()
         else:
             return Response('Make sure detail is correct and unique')
+        
+        messages.success(request, 'Details added Successfully !!')
 
         return HttpResponseRedirect('/get_students/')
     return render(request, 'add_stud.html')
@@ -41,6 +43,7 @@ def delete_student(request, stud_id):
     student = students.objects.get(stud_id=stud_id)
     print(student.name)
     student.delete()
+    messages.success(request, 'Student Deleted !!')
     return HttpResponseRedirect('/get_students/')
 
 @api_view(['GET','POST'])
@@ -51,10 +54,33 @@ def update_student(request, stud_id):
         data = studentsSerializers(instance=stud_obj, data=student)
         if data.is_valid():
             data.save()
+        elif stud_id is not None:
+            stud_obj = students.objects.filter(stud_id = stud_id)
+            if stud_obj is not None:
+                return Response('Student ID already exist')
         else:
             return Response('Make sure detail is correct and unique')
+        
+        messages.success(request, 'Details updated Successfully !!')
         return HttpResponseRedirect('/get_students/')
     
     stud_obj = students.objects.get(stud_id = stud_id)
     data = studentsSerializers(stud_obj)
     return render(request, 'update_student.html', {'stud':data.data})
+
+@api_view(['GET','POST'])
+def search_student(request):
+    stud_name = request.POST.get('name')
+    print(stud_name)
+    student_obj = students.objects.filter(name__icontains=stud_name)
+    if student_obj != None:
+        data = studentsSerializers(student_obj, many=True)
+        print(data.data)
+        context = {
+            'students': data.data
+        }
+    
+        return render(request, 'search.html', context)
+    else:
+        return Response("No Data Found")
+        
