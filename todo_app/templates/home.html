@@ -6,9 +6,16 @@
     <title>Daily Tasks</title>
 </head>
 <body>
-    <!-- {% for task in tasks %}
+
+    <form method="post" action="">
+        {{form}}
+        <input type="submit">
+    </form>
+
+    {% for task in tasks %}
     <p>{{task}}</p>
-    {% endfor %} -->
-    {{form.as_p}}
+    {% endfor %}
+
+    
 </body>
 </html>

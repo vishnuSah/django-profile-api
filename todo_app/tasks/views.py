@@ -7,9 +7,12 @@ from .forms import TaskForm
 # Create your views here.
 
 def index(request):
-    #tasks = Task.objects.all()
-    context = {}
+    tasks = Task.objects.all()
 
-    context['form'] = TaskForm()
+    form = TaskForm()
+    context = {
+        'tasks':tasks,
+        'form':form
+    }
 
     return render(request, 'home.html', context)
