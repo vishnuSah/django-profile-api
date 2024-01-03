@@ -7,15 +7,23 @@
 </head>
 <body>
 
-    <form method="post" action="">
-        {{form}}
-        <input type="submit">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.task}}
+        <input type="submit" name="add_task">
     </form>
 
-    {% for task in tasks %}
-    <p>{{task}}</p>
-    {% endfor %}
-
+    <div>
+        {% for task in tasks %}
+            {% if task.completed == True %}
+                <p><strike>{{task}}</strike></p>
+            {% else %}
+                <p>{{task}}</p>
+            {% endif %}
+                <a href="{% url 'update' task.id %}">Update</a>
+                <a href="{% url 'delete' task.id %}">Delete</a>
+        {% endfor %}
+    </div>
     
 </body>
 </html>
