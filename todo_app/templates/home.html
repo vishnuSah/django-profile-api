@@ -67,7 +67,7 @@
             {% if task.completed == True %}
                 <p><strike>{{task}}</strike></p>
             {% else %}
-                <p>{{task}}</p>
+                <p><b>{{task}}</b></p>
             {% endif %}
                 <a class="btn btn-sm btn-info" href="{% url 'update' task.id %}">Update</a>
                 <a class="btn btn-sm btn-danger" href="{% url 'delete' task.id %}">Delete</a>
