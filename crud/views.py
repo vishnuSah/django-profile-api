@@ -92,12 +92,25 @@ def register(request):
     form = CreateUserForm()
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
-        print(request.data)
+        #print(request.data)
         if form.is_valid():
             form.save()
+            messages.success(request, "Account created successfully !!")
+
 
     context = {
         'form': form
     }
 
     return render(request, 'register.html', context)
+
+@api_view(['GET','POST'])
+def perform_login(request):
+
+    form = CreateUserForm()
+
+    context = {
+        'form':form
+    }
+    
+    return render(request, 'login.html', context)

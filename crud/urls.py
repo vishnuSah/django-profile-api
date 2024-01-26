@@ -9,4 +9,5 @@ urlpatterns = [
     path('update_student/<int:stud_id>', views.update_student),
     path('search_student/', views.search_student, name="search_student"),
     path('', views.register, name="register"),
+    path('login/', views.perform_login, name="login"),
 ]
