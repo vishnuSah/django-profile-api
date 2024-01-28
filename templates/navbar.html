@@ -25,9 +25,11 @@
         <form action="/search_student/" method="post" class="d-flex" role="search">
           {% csrf_token %}
           <input class="form-control me-2" type="text" name="name" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-          
+          <button class="btn btn-outline-success" type="submit">Search</button>          
         </form>
+        <form method="GET" action="/logout/">
+          <input class="btn btn-success" type="submit" value="Log out">
+      </form>
       </div>
     </div>
   </nav>

@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import students
 from .serializers import studentsSerializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 
@@ -109,8 +110,27 @@ def perform_login(request):
 
     form = CreateUserForm()
 
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        print(username, password)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/get_students/')
+        else:
+            messages.error(request, "Please enter correct username and password")
+            return redirect('/login/')
+
+
     context = {
         'form':form
     }
     
     return render(request, 'login.html', context)
+
+@api_view(['GET'])
+def perform_logout(request):
+    logout(request)
+    return redirect("/login/")
+    
